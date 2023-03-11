@@ -1,11 +1,13 @@
-import React from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { BsCart2 } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const CartWidget = () => {
   return (
     <div>
-      <span>0</span>
-      <AiOutlineShoppingCart size={"24px"} />
+      <Link to="/cart">
+        <span>0</span>
+        <BsCart2 />
+      </Link>
     </div>
   );
 };
