@@ -1,22 +1,17 @@
-.container {
-  background-color: #e7e7e7;
-  display: flex;
-  flex-direction: center;
-  justify-content: center;
-  height: 100vw;
-}
+
 .cardContainer {
-  width: 200px;
-  height: 200px;
+  width: 768px;
+  height: auto;
   background-color: white;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 70% 30%;
   box-shadow: 2px 3px 10px 0px rgba(0, 0, 0, 0.35);
+}
+.imgContainer {
+  display: grid;
+  place-content: center;
 }
 .cardTitle {
   color: black;
   text-align: center;
-}
-.cardImage {
-  width: 100%;
 }

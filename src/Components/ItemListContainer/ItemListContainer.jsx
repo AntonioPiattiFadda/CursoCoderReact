@@ -1,31 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import products from "../../productMook";
 import ItemList from "../ItemList/ItemList";
 import styles from "./ItemListContainer.module.css";
+import SyncLoader from "react-spinners/SyncLoader";
+import { db } from "../../FirebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const ItemListContainer = () => {
   const { categoryName } = useParams();
 
   const [items, setItems] = useState([]);
 
-  const filteredProduct = products.filter(
-    (product) => product.category === categoryName
-  );
-
   useEffect(() => {
-    /* fetch("http://localhost:5000/products")
-      .then((res) => res.json())
-      .then((res) => setItems(categoryName ? filteredProduct : products));*/
+    const itemCollection = collection(db, "products");
+    let consulta = undefined;
 
-    const productList = new Promise((resolve, reject) => {
-      resolve(setItems(categoryName ? filteredProduct : products));
+    if (categoryName) {
+      const q = query(
+        itemCollection,
+        where("category", "==", `${categoryName}`)
+      );
+      consulta = getDocs(q);
+    } else {
+      consulta = getDocs(itemCollection);
+    }
+    consulta.then((res) => {
+      let products = res.docs.map((element) => {
+        return {
+          ...element.data(),
+          id: element.id,
+        };
+      });
+      setItems(products);
     });
   }, [categoryName]);
 
   return (
     <div className={styles.itemListContainer}>
-      <ItemList items={items} />
+      {items.length === 0 ? (
+        <SyncLoader color="#36d7b7" />
+      ) : (
+        <ItemList items={items} />
+      )}
     </div>
   );
 };

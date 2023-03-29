@@ -1,8 +1,35 @@
 import { Link } from "react-router-dom";
 import CartWidget from "../CartWidget/CartWidget";
+import SearchBar from "../SearchBar/SearchBar";
 import "./Navbar.css";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "../../FirebaseConfig";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const itemCollection = collection(db, "category");
+    getDocs(itemCollection).then((res) => {
+      let newCategories = res.docs.map((category) => {
+        return {
+          ...category.data(),
+          id: category.id,
+        };
+      });
+      let firstCategory = newCategories.find(
+        (category) => category.title === "Todas"
+      );
+      let otherCategories = newCategories.filter(
+        (category) => category.title !== "Todas"
+      );
+
+      //// TERMINAR ACA!!!
+      setCategories([...otherCategories, ...firstCategory]);
+    });
+  }, []);
+
   return (
     <div className="navbar__container">
       <Link to="/">
@@ -12,16 +39,15 @@ const Navbar = () => {
           className="LogoPrincipal"
         />
       </Link>
+      <SearchBar />
       <ul className="navbar__u-list">
-        <Link to="/category/deportivas" style={{ textDecoration: "none" }}>
-          Deportivas
-        </Link>
-        <Link to="/category/urbanas" style={{ textDecoration: "none" }}>
-          Urbanas
-        </Link>
-        <Link to="/" style={{ textDecoration: "none" }}>
-          Todas
-        </Link>
+        {categories.map((category) => {
+          return (
+            <Link to={category.path} style={{ textDecoration: "none" }}>
+              {category.title}
+            </Link>
+          );
+        })}
       </ul>
       <CartWidget />
     </div>
