@@ -7,7 +7,6 @@ import styles from "./index.module.css";
 import Form from "./Components/Form/Form";
 import CartContextProvider from "./Components/Context/CartContext";
 import Cart from "./Components/Cart/Cart";
-import GetProductsContextProvider from "./Components/Context/GetProductsContext";
 
 function App() {
   return (
@@ -19,6 +18,10 @@ function App() {
             <Route path="/" element={<ItemListContainer />} />
             <Route
               path="/category/:categoryName"
+              element={<ItemListContainer />}
+            />
+            <Route
+              path="/ItemSearch/:searchedItem"
               element={<ItemListContainer />}
             />
             <Route path="/itemDetail/:id" element={<ItemDetailContainer />} />

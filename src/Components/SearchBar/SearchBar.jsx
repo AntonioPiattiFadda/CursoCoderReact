@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { Link, withRouter } from "react-router-dom";
 
-const SearchBar = () => {
+const SearchBar = ({ history }) => {
   const [searchString, setSearchString] = useState("");
 
-  const search = () => {
-    console.log(searchString, "Mandar searchstring a ItemList");
-    setSearchString("");
+  const handleKeyPress = (e) => {
+    if (e.keyCode === 13) {
+      history.push(`/ItemSearch/${searchString}`);
+      setSearchString("");
+    }
   };
 
   return (
@@ -14,10 +17,13 @@ const SearchBar = () => {
         value={searchString}
         type="text"
         onChange={(e) => setSearchString(e.target.value)}
+        onKeyDown={handleKeyPress}
       />
-      <button src="" alt="" onClick={search}>
-        Buscar
-      </button>
+      <Link to={`/ItemSearch/${searchString}`}>
+        <button src="" alt="">
+          Buscar
+        </button>
+      </Link>
     </div>
   );
 };

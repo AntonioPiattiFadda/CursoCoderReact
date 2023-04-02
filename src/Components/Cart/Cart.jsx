@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { CartContext } from "../Context/CartContext";
 import Swal from "sweetalert2";
 import FormCheckout from "../FormCheckout/FormCheckout";
+import EmptyCart from "../EmptyCart/EmptyCart";
 
 const Cart = () => {
   const {
@@ -44,36 +45,38 @@ const Cart = () => {
   };
 
   return !showFormCheckout ? (
-    <div>
-      {cart.map((product) => {
-        return (
-          <div key={product.id}>
-            <h1>{product.title}</h1>
-            <span>{product.price}</span>
-            <span style={{ color: "red" }}>Cantidad: {product.quantity}</span>
-            <span>{product.stock} disponibles</span>
-            <button onClick={() => handlePlus(product.id, product.stock)}>
-              +
-            </button>
-            <button onClick={() => handleMinus(product.id)}>-</button>
-            <button
-              onClick={() => {
-                removeProduct(product.id);
-              }}
-            >
-              X
-            </button>
-          </div>
-        );
-      })}
-      <div>Total : {total}</div>
-      {cart.length ? (
+    cart.length ? (
+      <div>
+        {cart.map((product) => {
+          return (
+            <div key={product.id}>
+              <h1>{product.title}</h1>
+              <span>{product.price}</span>
+              <span style={{ color: "red" }}>Cantidad: {product.quantity}</span>
+              <span>{product.stock} disponibles</span>
+              <button onClick={() => handlePlus(product.id, product.stock)}>
+                +
+              </button>
+              <button onClick={() => handleMinus(product.id)}>-</button>
+              <button
+                onClick={() => {
+                  removeProduct(product.id);
+                }}
+              >
+                X
+              </button>
+            </div>
+          );
+        })}
+        <div>Total : {total}</div>
         <div>
           <button onClick={handleClear}>Limpiar carrito</button>
           <button onClick={handleBuy}>Comprar</button>
         </div>
-      ) : null}
-    </div>
+      </div>
+    ) : (
+      <EmptyCart />
+    )
   ) : (
     <FormCheckout getCartTotalPrice={getCartTotalPrice} cart={cart} />
   );

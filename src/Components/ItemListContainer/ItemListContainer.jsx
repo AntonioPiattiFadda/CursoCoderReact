@@ -7,11 +7,12 @@ import { db } from "../../FirebaseConfig";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
 const ItemListContainer = () => {
-  const { categoryName } = useParams();
-
+  const { categoryName, searchedItem } = useParams();
+  const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     const itemCollection = collection(db, "products");
     let consulta = undefined;
 
@@ -19,6 +20,14 @@ const ItemListContainer = () => {
       const q = query(
         itemCollection,
         where("category", "==", `${categoryName}`)
+      );
+      consulta = getDocs(q);
+    } else if (searchedItem) {
+      const searchedItemLowerCase = searchedItem.toLowerCase();
+      const q = query(
+        itemCollection,
+        where("title", ">=", `${searchedItemLowerCase}`),
+        where("title", "<=", `${searchedItemLowerCase}\uf8ff`)
       );
       consulta = getDocs(q);
     } else {
@@ -32,16 +41,27 @@ const ItemListContainer = () => {
         };
       });
       setItems(products);
+      setLoading(false);
     });
-  }, [categoryName]);
+  }, [categoryName, searchedItem]);
+
+  useEffect(() => {
+    const itemCollection = collection(db, "products");
+    getDocs(itemCollection).then((res) => {
+      let products = res.docs.map((element) => {
+        return {
+          ...element.data(),
+          id: element.id,
+        };
+      });
+      setItems(products);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <div className={styles.itemListContainer}>
-      {items.length === 0 ? (
-        <SyncLoader color="#36d7b7" />
-      ) : (
-        <ItemList items={items} />
-      )}
+      {!!loading ? <SyncLoader color="#36d7b7" /> : <ItemList items={items} />}
     </div>
   );
 };

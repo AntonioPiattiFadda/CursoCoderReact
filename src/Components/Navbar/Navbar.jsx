@@ -24,9 +24,7 @@ const Navbar = () => {
       let otherCategories = newCategories.filter(
         (category) => category.title !== "Todas"
       );
-
-      //// TERMINAR ACA!!!
-      setCategories([...otherCategories, ...firstCategory]);
+      setCategories([firstCategory, ...otherCategories]);
     });
   }, []);
 
