@@ -33,4 +33,34 @@
 .cardImage {
   object-fit: cover;
   width: 100%;
+  max-height: 250px;
+}
+.cardInformationContent {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardInformationContent > span:nth-child(1) {
+  color: #333333;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.cardInformationContent > span:nth-child(2) {
+  color: #999999;
+  font-size: 14px;
+}
+
+.cardInformationContent > span:nth-child(3) {
+  color: #333333;
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.cardInformationContent > span:nth-child(4) {
+  color: #999999;
+  font-size: 14px;
 }

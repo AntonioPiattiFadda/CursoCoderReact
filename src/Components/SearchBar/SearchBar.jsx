@@ -1,29 +1,26 @@
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+import style from "./SearchBar.module.css";
 
-const SearchBar = ({ history }) => {
+const SearchBar = ({}) => {
   const [searchString, setSearchString] = useState("");
 
   const handleKeyPress = (e) => {
-    if (e.keyCode === 13) {
-      history.push(`/ItemSearch/${searchString}`);
-      setSearchString("");
+    if (e.key === "Enter") {
+      window.location.href = `/ItemSearch/${searchString}`;
     }
   };
 
   return (
     <div>
       <input
+        className={style.searchInput}
         value={searchString}
         type="text"
+        placeholder="Buscar en Mercado Libre"
         onChange={(e) => setSearchString(e.target.value)}
-        onKeyDown={handleKeyPress}
+        onKeyPress={handleKeyPress}
       />
-      <Link to={`/ItemSearch/${searchString}`}>
-        <button src="" alt="">
-          Buscar
-        </button>
-      </Link>
     </div>
   );
 };

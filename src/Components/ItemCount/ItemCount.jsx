@@ -11,8 +11,6 @@ const ItemCount = ({ stock, initial = 1, onAdd }) => {
   const sumar = () => {
     if (contador < stock) {
       setContador(contador + 1);
-    } else {
-      alert("Solo tenemos .. elementos disponibles");
     }
   };
 
@@ -24,13 +22,19 @@ const ItemCount = ({ stock, initial = 1, onAdd }) => {
 
   return (
     <div className={styles.container}>
-      <h2>{contador}</h2>
-      <div>
-        <button onClick={sumar}>Sumar</button>
-
-        <button onClick={restar}>Restar</button>
+      <h2 className={styles.counter}>{contador}</h2>
+      <span className={styles.stock}>({stock} disponibles)</span>
+      <div className={styles.buttonsContainer}>
+        <button className={styles.button} onClick={sumar}>
+          +
+        </button>
+        <button className={styles.button} onClick={restar}>
+          -
+        </button>
       </div>
-      <button onClick={() => onAdd(contador)}>Comprar ahora</button>
+      <button className={styles.buyButton} onClick={() => onAdd(contador)}>
+        Añadir al carrito
+      </button>
     </div>
   );
 };

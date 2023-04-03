@@ -1,5 +1,8 @@
 .container {
-    background-color: #e7e7e7;
-    display: grid;
-    place-content: center;
-  }
+  background-color: #e7e7e7;
+  min-height: calc(100vh - 250px);
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
+}

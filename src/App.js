@@ -7,6 +7,7 @@ import styles from "./index.module.css";
 import Form from "./Components/Form/Form";
 import CartContextProvider from "./Components/Context/CartContext";
 import Cart from "./Components/Cart/Cart";
+import NotFound from "./Components/NotFound/NotFound";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/formulario" element={<Form />} />
 
-            <Route path="*" element={<h1>Not found</h1>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </CartContextProvider>
         <Footer />

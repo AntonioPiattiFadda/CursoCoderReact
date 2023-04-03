@@ -1,17 +1,50 @@
-
 .cardContainer {
-  width: 768px;
-  height: auto;
-  background-color: white;
-  display: grid;
-  grid-template-columns: 70% 30%;
-  box-shadow: 2px 3px 10px 0px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
 }
+
 .imgContainer {
-  display: grid;
-  place-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
+
+.cardImage {
+  width: 80%;
+  max-width: 300px;
+  object-fit: contain;
+}
+
+.infoContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .cardTitle {
-  color: black;
-  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.freeShipping {
+  color: green;
+  margin-bottom: 10px;
+}
+
+.freeReturns {
+  color: #999;
+  margin-bottom: 10px;
 }

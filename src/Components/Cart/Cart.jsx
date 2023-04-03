@@ -3,6 +3,9 @@ import { CartContext } from "../Context/CartContext";
 import Swal from "sweetalert2";
 import FormCheckout from "../FormCheckout/FormCheckout";
 import EmptyCart from "../EmptyCart/EmptyCart";
+import Form from "../Form/Form";
+import Formulario from "../Form/Form";
+import styles from "./Cart.module.css";
 
 const Cart = () => {
   const {
@@ -46,39 +49,71 @@ const Cart = () => {
 
   return !showFormCheckout ? (
     cart.length ? (
-      <div>
-        {cart.map((product) => {
-          return (
-            <div key={product.id}>
-              <h1>{product.title}</h1>
-              <span>{product.price}</span>
-              <span style={{ color: "red" }}>Cantidad: {product.quantity}</span>
-              <span>{product.stock} disponibles</span>
-              <button onClick={() => handlePlus(product.id, product.stock)}>
-                +
-              </button>
-              <button onClick={() => handleMinus(product.id)}>-</button>
-              <button
-                onClick={() => {
-                  removeProduct(product.id);
-                }}
-              >
-                X
-              </button>
-            </div>
-          );
-        })}
-        <div>Total : {total}</div>
-        <div>
-          <button onClick={handleClear}>Limpiar carrito</button>
-          <button onClick={handleBuy}>Comprar</button>
+      <div className={styles.cartContainer}>
+        <h1 className={styles.title}>Mi carrito de compras</h1>
+        <div className={styles.cartItems}>
+          {cart.map((product) => {
+            return (
+              <div className={styles.cartItem} key={product.id}>
+                <img
+                  className={styles.productImage}
+                  src={product.img}
+                  alt={product.title}
+                />
+                <div className={styles.productDetails}>
+                  <h3 className={styles.productTitle}>{product.title}</h3>
+
+                  <div className={styles.productPriceAndQuantity}>
+                    <p className={styles.productPrice}>${product.price}</p>
+                    <div className={styles.productQuantity}>
+                      <button
+                        className={styles.quantityButton}
+                        onClick={() => handleMinus(product.id)}
+                      >
+                        -
+                      </button>
+                      <p className={styles.quantity}>{product.quantity}</p>
+                      <button
+                        className={styles.quantityButton}
+                        onClick={() => handlePlus(product.id, product.stock)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  className={styles.removeButton}
+                  onClick={() => removeProduct(product.id)}
+                >
+                  Eliminar producto
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        <div className={styles.cartTotal}>
+          <p className={styles.totalText}>Total:</p>
+          <p className={styles.totalAmount}>${total}</p>
+        </div>
+        <div className={styles.cartButtons}>
+          <button className={styles.clearButton} onClick={handleClear}>
+            Limpiar carrito
+          </button>
+          <button className={styles.buyButton} onClick={handleBuy}>
+            Comprar
+          </button>
         </div>
       </div>
     ) : (
       <EmptyCart />
     )
   ) : (
-    <FormCheckout getCartTotalPrice={getCartTotalPrice} cart={cart} />
+    <FormCheckout
+      getCartTotalPrice={getCartTotalPrice}
+      cart={cart}
+      clearCart={clearCart}
+    />
   );
 };
 

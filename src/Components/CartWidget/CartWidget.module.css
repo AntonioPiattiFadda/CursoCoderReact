@@ -1,0 +1,23 @@
+.cart__container {
+  position: relative;
+}
+
+.cart__count {
+  position: absolute;
+  top: -8px;
+  right: 0px;
+  width: 16px;
+  height: 16px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.cart__icon {
+  font-size: 24px;
+}

@@ -10,9 +10,9 @@ const ItemDetail = ({ onAdd, item, initialValue }) => {
       </div>
       <div className={styles.infoContainer}>
         <h1 className={styles.cardTitle}>{item.title}</h1>
-        <span>price</span>
-        <span>Llega gratis el martes</span>
-        <span>Devolucion gratis</span>
+        <span className={styles.price}>${item.price}</span>
+        <span className={styles.freeShipping}>Llega gratis el martes</span>
+        <span className={styles.freeReturns}>Devolución gratis</span>
         <ItemCount
           onAdd={onAdd}
           stock={item.stock}
@@ -24,3 +24,4 @@ const ItemDetail = ({ onAdd, item, initialValue }) => {
 };
 
 export default ItemDetail;
+

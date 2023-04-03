@@ -1,0 +1,41 @@
+.navbar__uList {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__listItem {
+  margin: 0 10px;
+}
+
+.navbar__link {
+  color: #000;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.navbar__link:hover {
+  color: #f4b400;
+}
+
+.navbar__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background-color: #f4b400;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar__link:hover::after {
+  width: 100%;
+}

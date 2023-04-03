@@ -1,3 +1,7 @@
-.itemListContainer{
-    background-color: #e7e7e7;
+.itemListContainer {
+  background-color: #e7e7e7;
+  min-height: calc(100vh - 250px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

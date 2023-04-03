@@ -5,6 +5,7 @@ import "./Navbar.css";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../FirebaseConfig";
 import { useEffect, useState } from "react";
+import styles from "./Navbar.module.css";
 
 const Navbar = () => {
   const [categories, setCategories] = useState([]);
@@ -38,12 +39,18 @@ const Navbar = () => {
         />
       </Link>
       <SearchBar />
-      <ul className="navbar__u-list">
+      <ul className={styles.navbar__uList}>
+        {" "}
         {categories.map((category) => {
           return (
-            <Link to={category.path} style={{ textDecoration: "none" }}>
-              {category.title}
-            </Link>
+            <li key={category.id} className={styles.navbar__listItem}>
+              {" "}
+             
+              <Link to={category.path} className={styles.navbar__link}>
+                {" "}
+                {category.title}
+              </Link>
+            </li>
           );
         })}
       </ul>

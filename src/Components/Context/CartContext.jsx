@@ -14,7 +14,6 @@ const CartContextProvider = ({ children }) => {
   const addToCart = (selectedProduct) => {
     let dobbleProduct = isInCart(selectedProduct.id);
     if (dobbleProduct) {
-      // Acá hay un error. La segunda vez que entra en el if falla.
       let newArray = cart.map((product) => {
         if (selectedProduct.id === product.id) {
           return {
@@ -22,7 +21,6 @@ const CartContextProvider = ({ children }) => {
             quantity: selectedProduct.quantity,
           };
         }
-        // Me faltaba retornar el producto si no entraba en el if.
         return product;
       });
       setCart(newArray);
