@@ -12,7 +12,7 @@ const SearchBar = ({}) => {
   };
 
   return (
-    <div>
+    <div className={style.searchInput__container}>
       <input
         className={style.searchInput}
         value={searchString}

@@ -14,3 +14,18 @@
 .searchInput::placeholder {
   color: #999;
 }
+
+@media screen and (max-width: 465px) {
+  .searchInput__container {
+    max-width: 178px;
+  }
+}
+
+@media screen and (max-width: 411px) {
+  .searchInput__container {
+    max-width: 45px;
+  }
+  .searchInput__container:focus {
+    max-width: 178px;
+  }
+}
